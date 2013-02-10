@@ -1,6 +1,6 @@
 # 4clojure core.logic problems
 
-This repo is where I'm publically dumping the core.logic problems that
+This repo is where I'm publicly dumping the core.logic problems that
 I assembled for a Chicago Clojure workshop and had deployed at
 4clojure.gfredericks.com for a while.
 
