@@ -4,7 +4,16 @@
   (:require [clj-wrap-indent.core :as wrap]
             [clojic.problems :refer [problems]]
             [clojure.core.logic
-             :refer [run* fail succeed == fresh conde]]))
+             :refer [==
+                     conde
+                     conso
+                     fail
+                     firsto
+                     fresh
+                     resto
+                     run
+                     run*
+                     succeed]]))
 
 (def my-solutions
   {"Something trivial" :something
@@ -46,4 +55,3 @@
 (defn -main [& _]
   (run-solutions))
 
-(run-solutions)

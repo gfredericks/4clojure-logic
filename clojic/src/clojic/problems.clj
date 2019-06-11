@@ -144,18 +144,19 @@
     :tags ["GF"]}
    {:title "Conde 5"
     :description "What's going on here? How many clauses is that? What
-                  the I don't even"
+                   the I don't even...."
     :tests '[(= __ (run* [q]
                      (conde [fail succeed])))]
     :tags ["TRS"]}
-   {:title "Conde 6"
-    :description "Fill in the conde clauses such that the program
-                  evalues to [:tim :buck :two]."
-    :tests '[(= [:tim :buck :two] (run* [q] (conde __)))]
-    :tags ["GF"]}
+   ;; TODO: The test runner trips up on expanding __ in a body.
+   ;; {:title "Conde 6"
+   ;;  :description "Fill in the conde clauses such that the program
+   ;;                 evalues to [:tim :buck :two]."
+   ;;  :tests '[(= [:tim :buck :two] (run* [q] (conde __)))]
+   ;;  :tags ["GF"]}
    {:title "Run 1"
     :description "When you use run instead of run* you can limit the
-                 results to a particular number."
+                  results to a particular number."
     :tests '[(= __ (run 1 [q]
                      (conde
                       [(== q :foo)]
@@ -246,8 +247,9 @@
     :tags ["GF"]}
    {:title "Matche 1"
     :description "Matche is a pattern-matching goal that can largely
-  replace tedious uses of fresh, firsto, resto, etc. See also defne.
-  The clauses are tested independently, like conde."
+                  replace tedious uses of fresh, firsto, resto,
+                  etc. See also defne.  The clauses are tested
+                  independently, like conde."
     :tests '[(= __ (run* [q]
                      (matche [:foo]
                              ([:foo] (== q 15))
@@ -271,7 +273,7 @@
     :tags ["GF"]}
    {:title "Matche 4"
     :description "Pattern matching lets us implicitely unify two things
-  by giving them the same name."
+                  by giving them the same name."
     :tests '[(= __ (run* [a b c]
                      (matche [a b]
                              ([17 [x]] (== x c))
@@ -279,7 +281,7 @@
     :tags ["GF"]}
    {:title "Branching"
     :description "So many possibilities! (Note the return value is a set, so you
-                don't have to worry about ordering)"
+                  don't have to worry about ordering)"
     :tests '[(= __ (set
                     (let [good-number (fn [x]
                                         (conde [(== 42 x)] [(== x 1024)]))
@@ -313,6 +315,7 @@
              (= [[:a :b]] (letfn [(twinsies [x] __)]
                             (run* [x y] (twinsies [[7 7] [:a x] [y :b]]))))]
     :tags ["GF"]}
+
    ;; TODO: maps and partial-map?
    ;; TODO: defrel & facts?
    ;; TODO: finite domains?
