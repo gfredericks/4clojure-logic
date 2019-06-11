@@ -1,0 +1,5 @@
+{:deps
+ {org.clojure/clojure {:mvn/version "1.10.0-RC2"}
+  org.clojure/core.logic {:mvn/version "0.8.11"}
+  clj-wrap-indent {:mvn/version "1.0.0"}}
+ :aliases {:runprobs {:main-opts ["-m" "clojic.core"]}}}
