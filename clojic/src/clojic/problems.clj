@@ -1,19 +1,21 @@
 (ns clojic.problems)
 
 (def problems
-  [{:title "Something trivial"
+  [;; The first two are just to get people started:
+   {:title "Something trivial"
     :description "Put :something here"
-    :tests '[[(= __ :something)]]}
+    :tests '[(= __ :something)]}
    {:title "Something else trivial"
     :description "Put '(1 2 3) here"
-    :tests '[[(= __ '(1 2 3))]]}
+    :tests '[(= __ '(1 2 3))]}
+   ;; Real core.logic tests start here.
    {:title "Failure"
     :description (str "The fail goal never succeeds. run* always "
                       "returns a (possibly empty) list of values for q.")
     :tests '[(= __ (run* [q] fail))]
     :tags ["TRS"]}
    {:title "Success"
-    :description "The succeed goal always succeeds. "
+    :description "The succeed goal always succeeds; a succeeding value not bound to anything in particular is called a 'fresh' value, and is one of _0, _1, _2, ...."
     :tests '[(= __ (run* [q] succeed))]
     :tags ["TRS"]}
    {:title "Unification 1"
@@ -119,7 +121,7 @@
     :tags ["GF"]}
    {:title "Conde 2"
     :description "As always, unbound variables in each conde clause are
-                 'fresh'."
+                 'fresh'. Each clause starts the 'fresh count' anew for that conde branch."
     :tests '[(= __ (run* [a b c]
                      (conde
                       [(== a :foo)
@@ -173,7 +175,7 @@
                       [succeed fail])))]
     :tags ["TRS"]}
    {:title "Conde 8"
-    :description ""
+    :description "Who's hungry for some soup?"
     :tests '[(= __ (run* [r]
                      (fresh [x y]
                        (conde
@@ -236,15 +238,16 @@
                        (resto '(a c o r n) v)
                        (firsto v r))))]
     :tags ["TRS"]}
-   {:title "Sequences 6"
-    :description "Try to write a relation that succeeds when its input
-                  is a list. Note that strings are not considered
-                  sequences by the core.logic unifier."
-    :tests '[(= '(_0) (run 1 [q] (__ [7 8 9])))
-             (= () (run 1 [q] (__ 42)))
-             (= '([[:foo]]) (run 1 [q] (__ q) (== q [[:foo]])))
-             (= '() (run 1 [q] (__ q) (== q "seventeen")))]
-    :tags ["GF"]}
+   ;; TODO: get this one to work too
+   ;; {:title "Sequences 6"
+   ;;  :description "Try to write a relation that succeeds when its input
+   ;;                is a list. Note that strings are not considered
+   ;;                sequences by the core.logic unifier."
+   ;;  :tests '[(= '(_0) (run 1 [q] (__ [7 8 9])))
+   ;;           (= () (run 1 [q] (__ 42)))
+   ;;           (= '([[:foo]]) (run 1 [q] (__ q) (== q [[:foo]])))
+   ;;           (= '() (run 1 [q] (__ q) (== q "seventeen")))]
+   ;;  :tags ["GF"]}
    {:title "Matche 1"
     :description "Matche is a pattern-matching goal that can largely
                   replace tedious uses of fresh, firsto, resto,

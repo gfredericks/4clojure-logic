@@ -10,10 +10,12 @@
                      fail
                      firsto
                      fresh
+                     matche
                      resto
                      run
                      run*
-                     succeed]]))
+                     succeed]]
+            [zprint.core :as zp]))
 
 (def my-solutions
   {"Something trivial" :something
@@ -31,6 +33,7 @@
 
 (defn run-solutions []
   (let [stop (atom false)
+        failing-test (atom nil)
         probcount (atom 0)]
     (doseq [{:keys [title description tests] :as p} problems
             :let [s (get my-solutions title :notdone)]
@@ -43,14 +46,17 @@
                        {'__ (list 'quote s)} t)
               evaluated (binding [*ns* (find-ns 'clojic.core)]
                           (eval newcode))
-              result (if (true? evaluated) "pass!!" "FAIL")]
-          (when (or (not result)
-                    (= s :notdone))
-            (reset! stop true)
-            (println (format "\nTesting %s\nwith __ set to '%s': %s"
-                             t
-                             s
-                             result))))))))
+              result (true? evaluated)]
+          (println (format "\nTesting\n%s" (zp/zprint-str t 45) s))
+          (if-not (or (not result)
+                      (= s :notdone))
+            (println (format "\n__  == %s : PASS!" s))
+            (do
+              (reset! stop true)
+              (reset! failing-test title)
+              (println (format "\nTesting with __ set to '%s': %s"
+                               s (if result "pass!!" "FAIL"))))))))
+    [(if @stop :fail :pass) @failing-test]))
 
 (defn -main [& _]
   (run-solutions))
