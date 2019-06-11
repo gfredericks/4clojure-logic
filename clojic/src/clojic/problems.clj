@@ -293,31 +293,31 @@
                       (run* [a b]
                         (good-number a)
                         (somewhat-nested b)))))]}
-   {:title "Writing relations 1"
-    :description "Write a relation that succeeds when its input
-                  is a list of doubly-repeated elements."
-    :tests '[(= ['_0] (letfn [(twinsies [x] __)]
-                        (run* [q]
-                          (twinsies [:a :a :b :b :c :c])
-                          (twinsies []))))
-             (= [] (letfn [(twinsies [x] __)]
-                     (run* [q]
-                       (twinsies [:a :a :b :b :c :c 42]))))
-             (= [[:a :b]] (letfn [(twinsies [x] __)]
-                            (run* [x y] (twinsies [7 7 :a x y :b]))))]
-    :tags ["GF"]}
-   {:title "Writing relations 2"
-    :description "Write a relation that succeeds when its input
-                  is a list of pairs of elements."
-    :tests '[(= ['_0]
-                (letfn [(twinsies [x] __)]
-                  (run* [q]
-                    (twinsies [[:a :a] [:b :b] [:c :c]]) (twinsies []))))
-             (= [] (letfn [(twinsies [x] __)]
-                     (run* [q] (twinsies [[:a :a] [:b :b] [:c :c] 42]))))
-             (= [[:a :b]] (letfn [(twinsies [x] __)]
-                            (run* [x y] (twinsies [[7 7] [:a x] [y :b]]))))]
-    :tags ["GF"]}
+   ;; {:title "Writing relations 1"
+   ;;  :description "Write a relation that succeeds when its input
+   ;;                is a list of doubly-repeated elements."
+   ;;  :tests '[(= ['_0] (letfn [(twinsies [x] __)]
+   ;;                      (run* [q]
+   ;;                        (twinsies [:a :a :b :b :c :c])
+   ;;                        (twinsies []))))
+   ;;           (= [] (letfn [(twinsies [x] __)]
+   ;;                   (run* [q]
+   ;;                     (twinsies [:a :a :b :b :c :c 42]))))
+   ;;           (= [[:a :b]] (letfn [(twinsies [x] __)]
+   ;;                          (run* [x y] (twinsies [7 7 :a x y :b]))))]
+   ;;  :tags ["GF"]}
+   ;; {:title "Writing relations 2"
+   ;;  :description "Write a relation that succeeds when its input
+   ;;                is a list of pairs of elements."
+   ;;  :tests '[(= ['_0]
+   ;;              (letfn [(twinsies [x] __)]
+   ;;                (run* [q]
+   ;;                  (twinsies [[:a :a] [:b :b] [:c :c]]) (twinsies []))))
+   ;;           (= [] (letfn [(twinsies [x] __)]
+   ;;                   (run* [q] (twinsies [[:a :a] [:b :b] [:c :c] 42]))))
+   ;;           (= [[:a :b]] (letfn [(twinsies [x] __)]
+   ;;                          (run* [x y] (twinsies [[7 7] [:a x] [y :b]]))))]
+   ;;  :tags ["GF"]}
 
    ;; TODO: maps and partial-map?
    ;; TODO: defrel & facts?

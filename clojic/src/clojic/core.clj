@@ -61,3 +61,5 @@
 (defn -main [& _]
   (run-solutions))
 
+(comment
+  (run-solutions))
