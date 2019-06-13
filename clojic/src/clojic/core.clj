@@ -23,13 +23,11 @@
    ;; Fill in the rest of your solutions here!
    })
 
-(defn- problem-title [title probcount]
-  (format "\n\nProblem %d:\n\t%s\n" probcount title))
-
-(defn- problem-description
-  [description]
-  (wrap/wrap-indent (clojure.string/replace description #"\s+" " ")
-                    60 3))
+(defn- problem-description [description]
+  (-> description
+      (clojure.string/replace #"\s+" " ")
+      (wrap/wrap-indent
+       60 3)))
 
 (defn run-solutions []
   (let [stop (atom false)
@@ -39,7 +37,7 @@
             :let [s (get my-solutions title :notdone)]
             :while (not @stop)]
       (swap! probcount inc)
-      (println (problem-title title @probcount))
+      (println (format "\n\nProblem %d:\n\t%s\n" @probcount title))
       (println (problem-description description))
       (doseq [t tests]
         (let [newcode (clojure.walk/postwalk-replace

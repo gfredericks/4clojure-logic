@@ -10,7 +10,7 @@
     :tests '[(= __ '(1 2 3))]}
    ;; Real core.logic tests start here.
    {:title "Failure"
-    :description (str "The fail goal never succeeds. run* always "
+    :description (str "The 'fail' goal never succeeds. run* always "
                       "returns a (possibly empty) list of values for q.")
     :tests '[(= __ (run* [q] fail))]
     :tags ["TRS"]}
