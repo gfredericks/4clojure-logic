@@ -150,12 +150,12 @@
     :tests '[(= __ (run* [q]
                      (conde [fail succeed])))]
     :tags ["TRS"]}
-   ;; TODO: The test runner trips up on expanding __ in a body.
-   ;; {:title "Conde 6"
-   ;;  :description "Fill in the conde clauses such that the program
-   ;;                 evalues to [:tim :buck :two]."
-   ;;  :tests '[(= [:tim :buck :two] (run* [q] (conde __)))]
-   ;;  :tags ["GF"]}
+   {:title "Conde 6"
+    :description "Write a conde clause such that the program
+                   evalues to [:tim :buck :two]. You should
+                   replace '__' with '(conde ....)'"
+    :tests '[(= [:tim :buck :two] (run* [q] __))]
+    :tags ["GF"]}
    {:title "Run 1"
     :description "When you use run instead of run* you can limit the
                   results to a particular number."
@@ -238,7 +238,6 @@
                        (resto '(a c o r n) v)
                        (firsto v r))))]
     :tags ["TRS"]}
-   ;; TODO: get this one to work too
    ;; {:title "Sequences 6"
    ;;  :description "Try to write a relation that succeeds when its input
    ;;                is a list. Note that strings are not considered

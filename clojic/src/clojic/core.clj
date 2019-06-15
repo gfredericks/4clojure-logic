@@ -17,47 +17,56 @@
                      succeed]]
             [zprint.core :as zp]))
 
-(def my-solutions
-  {"Something trivial" :something
-   "Something else trivial" '(1 2 3)
-   ;; Fill in the rest of your solutions here!
-   })
+(defmacro defsolutions [nom & solpairs]
+  `(def ~nom
+     (->> (~@(partition 2 solpairs))
+          quote
+          (map vec)
+          (into {}))))
+
+(defsolutions solmap
+  "Something trivial" :something
+  "Something else trivial" '(1 2 3)
+  ;; Your other solutions here:
+  )
 
 (defn- problem-description [description]
   (-> description
       (clojure.string/replace #"\s+" " ")
-      (wrap/wrap-indent
-       60 3)))
+      (wrap/wrap-indent 60 3)))
 
 (defn run-solutions []
   (let [stop (atom false)
         failing-test (atom nil)
         probcount (atom 0)]
     (doseq [{:keys [title description tests] :as p} problems
-            :let [s (get my-solutions title :notdone)]
+            :let [s (get solmap title :notdone)]
             :while (not @stop)]
       (swap! probcount inc)
+      (println (apply str (repeat 60 "=")))
       (println (format "\n\nProblem %d:\n\t%s\n" @probcount title))
       (println (problem-description description))
       (doseq [t tests]
-        (let [newcode (clojure.walk/postwalk-replace
-                       {'__ (list 'quote s)} t)
-              evaluated (binding [*ns* (find-ns 'clojic.core)]
-                          (eval newcode))
-              result (true? evaluated)]
-          (println (format "\nTesting\n%s" (zp/zprint-str t 45) s))
-          (if-not (or (not result)
-                      (= s :notdone))
-            (println (format "\n__  == %s : PASS!" s))
+        (let [newcode (clojure.walk/postwalk-replace {'__ s} t)
+              result (binding [*ns* (find-ns 'clojic.core)]
+                       (eval newcode))]
+          (println (format "\nTesting\n\n%s" (zp/zprint-str t 45) s))
+          (if (or (not result)
+                  (= s :notdone))
             (do
               (reset! stop true)
               (reset! failing-test title)
-              (println (format "\nTesting with __ set to '%s': %s"
-                               s (if result "pass!!" "FAIL"))))))))
+              (println (format "\n... with '__' set to '%s': %s"
+                               s "FAIL")))
+            (println (format "\n__  <-- %s : PASS!" s))))))
+    (if-not @failing-test
+      (println "\n\n\nAll tests pass!  You're a core logician!"))
+    ;; For REPLing:
     [(if @stop :fail :pass) @failing-test]))
 
 (defn -main [& _]
-  (run-solutions))
+  (run-solutions)
+  (shutdown-agents))
 
 (comment
   (run-solutions))
