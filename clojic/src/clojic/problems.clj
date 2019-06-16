@@ -238,15 +238,15 @@
                        (resto '(a c o r n) v)
                        (firsto v r))))]
     :tags ["TRS"]}
-   ;; {:title "Sequences 6"
-   ;;  :description "Try to write a relation that succeeds when its input
-   ;;                is a list. Note that strings are not considered
-   ;;                sequences by the core.logic unifier."
-   ;;  :tests '[(= '(_0) (run 1 [q] (__ [7 8 9])))
-   ;;           (= () (run 1 [q] (__ 42)))
-   ;;           (= '([[:foo]]) (run 1 [q] (__ q) (== q [[:foo]])))
-   ;;           (= '() (run 1 [q] (__ q) (== q "seventeen")))]
-   ;;  :tags ["GF"]}
+   {:title "Sequences 6"
+    :description "Try to write a relation that succeeds when its input
+                  is a list. Note that strings are not considered
+                  sequences by the core.logic unifier."
+    :tests '[(= '(_0) (run 1 [q] (__ [7 8 9])))
+             (= () (run 1 [q] (__ 42)))
+             (= '([[:foo]]) (run 1 [q] (__ q) (== q [[:foo]])))
+             (= '() (run 1 [q] (__ q) (== q "seventeen")))]
+    :tags ["GF"]}
    {:title "Matche 1"
     :description "Matche is a pattern-matching goal that can largely
                   replace tedious uses of fresh, firsto, resto,
