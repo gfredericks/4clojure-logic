@@ -14,25 +14,24 @@
    {:title "Failure"
     :description "Logic program is all about goals. The 'fail' goal
                   never succeeds. run* always returns a (possibly empty)
-                  list of values for q."
+                  list of values for q. In this case, no goal succeeds,
+                  so there will be no values for q."
     :tests '[(= __ (run* [q] fail))]
     :tags ["TRS"]}
-   {:title "Success"
-    :description "The succeed goal always succeeds; a succeeding value
-                  not bound to anything in particular is called a 'fresh' value, and
-                  is one of _0, _1, _2, ...."
-    :tests '[(= __ (run* [q] succeed))]
-    :tags ["TRS"]}
    {:title "Unification 1"
-    :description "Unification succeeds when the two terms can be made equal."
+    :description "Unification succeeds when the two terms can be made equal.
+                  When the following unification succeeds, \"q\" is associated
+                  with the other term."
     :tests '[(= __ (run* [q] (== :mark q)))]
     :tags ["GF"]}
    {:title "Unification 2"
-    :description "Unification succeeds when the two terms can be made equal."
+    :description "If the only goal is unification, and that fails, \"q\"
+                  is not associated with any values."
     :tests '[(= __ (run* [q] (== 77 15)))]
     :tags ["GF"]}
    {:title "Unification 3"
-    :description "Unification succeeds when the two terms can be made equal."
+    :description "Given multiple, contratictory unification goals, no values
+                  for \"q\" are generated."
     :tests '[(= __ (run* [q] (== q 97) (== q 98)))]
     :tags ["GF"]}
    {:title "Unification 4"
@@ -42,6 +41,12 @@
    {:title "Unification 5"
     :description "This is a somewhat corny, similar version"
     :tests '[(= __ (run* [r] succeed (== :corn r)))]
+    :tags ["TRS"]}
+   {:title "A Fresh Success"
+    :description "The succeed goal always succeeds; a succeeding value
+                  not bound to anything in particular is called a 'fresh' value, and
+                  is one of _0, _1, _2, ...."
+    :tests '[(= __ (run* [q] succeed))]
     :tags ["TRS"]}
    {:title "Lettings 1"
     :description "You can (somewhat) mix logic programming
