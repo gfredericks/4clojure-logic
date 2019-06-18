@@ -2,20 +2,23 @@
 
 (def problems
   [;; The first two are just to get people started:
-   {:title "Something trivial"
-    :description "Put :something here"
+   {:title "First problem"
+    :description "Something trivial, to get you started. Put :something here."
     :tests '[(= __ :something)]}
-   {:title "Something else trivial"
+   {:title "Moar triviality"
     :description "Put '(1 2 3) here"
     :tests '[(= __ '(1 2 3))]}
    ;; Real core.logic tests start here.
    {:title "Failure"
-    :description (str "The 'fail' goal never succeeds. run* always "
-                      "returns a (possibly empty) list of values for q.")
+    :description "Logic program is all about goals. The 'fail' goal
+                  never succeeds. run* always returns a (possibly empty)
+                  list of values for q."
     :tests '[(= __ (run* [q] fail))]
     :tags ["TRS"]}
    {:title "Success"
-    :description "The succeed goal always succeeds; a succeeding value not bound to anything in particular is called a 'fresh' value, and is one of _0, _1, _2, ...."
+    :description "The succeed goal always succeeds; a succeeding value
+                  not bound to anything in particular is called a 'fresh' value, and
+                  is one of _0, _1, _2, ...."
     :tests '[(= __ (run* [q] succeed))]
     :tags ["TRS"]}
    {:title "Unification 1"
@@ -121,7 +124,8 @@
     :tags ["GF"]}
    {:title "Conde 2"
     :description "As always, unbound variables in each conde clause are
-                 'fresh'. Each clause starts the 'fresh count' anew for that conde branch."
+                 'fresh'. Each clause starts the 'fresh count' anew for
+                 that conde branch."
     :tests '[(= __ (run* [a b c]
                      (conde
                       [(== a :foo)
