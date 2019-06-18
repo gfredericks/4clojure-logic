@@ -1,6 +1,6 @@
 # core.logic exercises
 
-This repo contains exercises originally assembled by Gary Fredricks
+This repo contains exercises originally assembled by Gary Fredericks
 for a Chicago Clojure workshop. They were hosted on a port of the
 4clojure.com Website for awhile.
 
