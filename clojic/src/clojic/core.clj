@@ -71,5 +71,3 @@
   (run-solutions)
   (shutdown-agents))
 
-(comment)
-(run-solutions)

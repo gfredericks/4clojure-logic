@@ -3,7 +3,9 @@
 (def problems
   [;; The first two are just to get people started:
    {:title "First problem"
-    :description "Something trivial, to get you started. Put :something here."
+    :description "Something trivial, to get you started. Edit solutions.clj
+                  and set the first solution to \":something\" (without the
+                  quotes)."
     :tests '[(= __ :something)]}
    {:title "Moar triviality"
     :description "Put '(1 2 3) here"

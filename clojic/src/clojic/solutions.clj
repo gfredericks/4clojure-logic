@@ -7,3 +7,9 @@
   ;; Your other solutions here ...:
   )
 
+;; For REPL-driving your workflow, which is substantially faster,
+;; uncomment this form and evaluate the file every time you change
+;; your solutions.
+#_(do
+    (require '[clojic.core])
+    (clojic.core/run-solutions))
