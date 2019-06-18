@@ -1,17 +1,20 @@
-# 4clojure core.logic problems
+# core.logic exercises
 
-This repo is where I'm publicly dumping the core.logic problems that
-I assembled for a Chicago Clojure workshop and had deployed at
-4clojure.gfredericks.com for a while.
+This repo contains exercises originally assembled by Gary Fredricks
+for a Chicago Clojure workshop. They were hosted on a port of the
+4clojure.com Website for awhile.
 
 ## Usage?
 
-I don't think the problems are in the exact data format that 4clojure
-expects; I think I had a real basic script that did that (to keep the
-repetition low). So if you want to setup your own 4clojure with these
-problems it will not be trivial, but hopefully not hard.
+The workflow is "koan-style:" edit `src/clojic/solutions.clj` and either run
+
+    clojure -Arunprobs
+
+or uncomment and evaluate the form at the bottom of `solutions.clj`.
+A hint will appear for every problem and execution will stop at the
+next problem that needs solving.
 
 ## Contributions?
 
-I'd be happy to take pull requests to either make the issues in the
-above section easier, or to add/improve problems.
+I'd be happy to take pull requests to improve the workflow, or to
+add/improve problems.
