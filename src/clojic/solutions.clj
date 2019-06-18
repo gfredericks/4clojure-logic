@@ -10,7 +10,8 @@
 
 ;; For REPL-driving your workflow, which is substantially faster,
 ;; uncomment this form and evaluate the file every time you change
-;; your solutions.
+;; your solutions.  However, make sure it's commented out before
+;; running the problems on the command line.
 #_(do
     (require '[clojic.core])
     (clojic.core/run-solutions))

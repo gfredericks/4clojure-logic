@@ -28,7 +28,12 @@
       (clojure.string/replace #"\s+" " ")
       (wrap/wrap-indent 60 3)))
 
-(defn evaluate [expr]
+(defn evaluate
+  "
+  Evaluate supplied expression, logging exceptions without stacktraces
+  to aid readability while progressing through the problem sequence.
+  "
+  [expr]
   (binding [*ns* (find-ns 'clojic.core)]
     (try
       (eval expr)
@@ -39,15 +44,15 @@
         :exception))))
 
 (defn run-solutions []
-  (let [stop (atom false)
-        failing-test (atom nil)
-        probcount (atom 0)]
+  (let [progress (atom {:stop false
+                        :failing-test nil
+                        :probcount 0})]
     (doseq [{:keys [title description tests] :as p} problems
             :let [s (get sol/solmap title :notdone)]
-            :while (not @stop)]
-      (swap! probcount inc)
+            :while (not (get @progress :stop))]
+      (swap! progress update :probcount inc)
       (println (apply str (repeat 60 "=")))
-      (println (format "\n\nProblem %d:\n\t%s\n" @probcount title))
+      (println (format "\n\nProblem %d:\n\t%s\n" (:probcount @progress) title))
       (println (problem-description description))
       (doseq [t tests]
         (let [newcode (clojure.walk/postwalk-replace {'__ s} t)
@@ -57,17 +62,16 @@
                   (= s :notdone)
                   (= result :exception))
             (do
-              (reset! stop true)
-              (reset! failing-test title)
+              (swap! progress
+                     assoc :stop true, :failing-test title)
               (println (format "\n... with '__' set to '%s': %s"
                                s "FAIL")))
             (println (format "\n__  <-- %s : PASS!" s))))))
-    (if-not @failing-test
-      (println "\n\n\nAll tests pass!  You're a core logician!"))
-    ;; For REPLing:
-    [(if @stop :fail :pass) @failing-test]))
+    (if (:stop @progress)
+      ;; For REPLing, return where tests are currently failing:
+      (:failing-test @progress)
+      (println "\n\n\nAll tests pass!  You're a core logician!"))))
 
 (defn -main [& _]
   (run-solutions)
   (shutdown-agents))
-
